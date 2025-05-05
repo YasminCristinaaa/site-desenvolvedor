@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechDev Solutions - Desenvolvimento de Software</title>
+    <style>
+        /* Reset básico para garantir consistência entre navegadores */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Variáveis de cores para facilitar modificações */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --light-color: #f3f4f6;
+            --dark-color: #1f2937;
+            --accent-color: #4ade80;
+        }
+
+        /* Estilo para o corpo do site */
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        /* Cabeçalho do site */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        /* Estilo para o container de navegação */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Estilo para o logo */
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Estilo para o menu de navegação */
+        .nav-menu {
+            display: flex;
+            list-style-type: none;
+        }
+
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Estilo para o hero banner */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('software.jpg ') center/cover no-repeat;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Estilo para as seções */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Estilo para a seção de serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Estilo para a seção Sobre Nós */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        /* Estilo para a seção Equipe */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .team-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 1.5rem;
+        }
+
+        /* Estilo para a seção de depoimentos */
+        .testimonials {
+            background-color: var(--dark-color);
+            color: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        /* Estilo para a seção de contato */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Estilo para o rodapé */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-column ul {
+            list-style-type: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Media queries para responsividade */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none; /* Em um site real, aqui adicionaríamos um menu mobile */
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho com navegação -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">TechDev Solutions</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#team">Equipe</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Banner / Seção Principal -->
+    <section id="home" class="hero">
+        <h1>Soluções Inovadoras em Desenvolvimento de Software</h1>
+        <p>Transformamos ideias em produtos digitais de alto impacto. Nossa equipe de desenvolvedores de elite está pronta para criar a solução perfeita para o seu negócio.</p>
+        <a href="#contact" class="btn">Fale Conosco</a>
+    </section>
+
+    <!-- Seção de Serviços -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="services-grid">
+                <!-- Serviço 1 -->
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Desenvolvimento Web</h3>
+                    <p>Criamos sites e aplicações web modernas, responsivas e otimizadas para SEO. Utilizamos as tecnologias mais recentes para garantir desempenho e segurança.</p>
+                </div>
+                
+                <!-- Serviço 2 -->
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Aplicativos Mobile</h3>
+                    <p>Desenvolvemos aplicativos nativos e híbridos para iOS e Android, focados em experiência do usuário e performance, utilizando Flutter, React Native e Swift.</p>
+                </div>
+                
+                <!-- Serviço 3 -->
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Software Personalizado</h3>
+                    <p>Soluções de software sob medida para atender às necessidades específicas do seu negócio, com foco em escalabilidade e manutenibilidade.</p>
+                </div>
+                
+                <!-- Serviço 4 -->
+                <div class="service-card">
+                    <div class="service-icon">☁️</div>
+                    <h3>Cloud & DevOps</h3>
+                    <p>Implementamos infraestrutura na nuvem e práticas de DevOps para garantir a entrega contínua e escalabilidade dos seus projetos.</p>
+                </div>
+                
+                <!-- Serviço 5 -->
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Cibersegurança</h3>
+                    <p>Auditoria e implementação de segurança em aplicações web e mobile, garantindo a proteção dos dados da sua empresa e clientes.</p>
+                </div>
+                
+                <!-- Serviço 6 -->
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>BI & Analytics</h3>
+                    <p>Desenvolvimento de dashboards e soluções de Business Intelligence para análise de dados e tomada de decisões estratégicas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre Nós -->
+    <section id="about" style="background-color: white;">
+        <div class="container">
+            <h2 class="section-title">Sobre Nós</h2>
+            <div class="about-content">
+                <div>
+                    <img src="sobrenos.jpg" alt="Equipe TechDev Solutions" style="width: 100%; border-radius: 10px;">
+                </div>
+                <div>
+                    <h3>Experiência & Inovação</h3>
+                    <p>A TechDev Solutions é uma empresa especializada em desenvolvimento de software com mais de 10 anos de experiência no mercado. Nossa equipe é formada por profissionais altamente qualificados e apaixonados por tecnologia.</p>
+                    <p>Acreditamos que o software certo pode transformar negócios e melhorar a vida das pessoas. Por isso, estamos sempre em busca das melhores soluções e tecnologias para nossos clientes.</p>
+                    <p>Nossa metodologia ágil nos permite entregar projetos com qualidade e dentro do prazo, garantindo a satisfação total dos nossos clientes.</p>
+                    <h3>Nossos Valores</h3>
+                    <ul>
+                        <li>Inovação contínua</li>
+                        <li>Excelência técnica</li>
+                        <li>Foco no cliente</li>
+                        <li>Comprometimento com resultados</li>
+                        <li>Trabalho em equipe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Equipe -->
+    <section id="team">
+        <div class="container">
+            <h2 class="section-title">Nossa Equipe</h2>
+            <div class="team-grid">
+                <!-- Membro 1 -->
+                <div class="team-member">
+                    <img src="carlossilva.jpg" alt="Foto do Desenvolvedor" class="team-photo">
+                    <div class="team-info">
+                        <h3>Carlos Silva</h3>
+                        <p>CTO & Desenvolvedor Full Stack</p>
+                    </div>
+                </div>
+                
+                <!-- Membro 2 -->
+                <div class="team-member">
+                    <img src="ana costa.webp" alt="Foto da Desenvolvedora" class="team-photo">
+                    <div class="team-info">
+                        <h3>Ana Costa</h3>
+                        <p>UX/UI Designer</p>
+                    </div>
+                </div>
+                
+                <!-- Membro 3 -->
+                <div class="team-member">
+                    <img src="lucasmendes.jpg" alt="Foto do Desenvolvedor" class="team-photo">
+                    <div class="team-info">
+                        <h3>Lucas Mendes</h3>
+                        <p>Desenvolvedor Mobile</p>
+                    </div>
+                </div>
+                
+                <!-- Membro 4 -->
+                <div class="team-member">
+                    <img src="julianarocha.jpg" alt="Foto da Desenvolvedora" class="team-photo">
+                    <div class="team-info">
+                        <h3>Juliana Rocha</h3>
+                        <p>DevOps Engineer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">O Que Nossos Clientes Dizem</h2>
+            <div class="testimonial-grid">
+                <!-- Depoimento 1 -->
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"A TechDev Solutions transformou completamente nosso processo interno com um software personalizado que superou todas as nossas expectativas. A equipe é extremamente profissional e atenciosa."</p>
+                    <p class="testimonial-author">- Maria Santos, CEO da InnovaTech</p>
+                </div>
+                
+                <!-- Depoimento 2 -->
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"O aplicativo desenvolvido pela TechDev aumentou nossas vendas em 40% no primeiro trimestre após o lançamento. O suporte técnico é excelente!"</p>
+                    <p class="testimonial-author">- Roberto Almeida, Diretor Comercial da RapidSales</p>
+                </div>
+                
+                <!-- Depoimento 3 -->
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Estamos extremamente satisfeitos com o novo sistema de gerenciamento desenvolvido. A migração foi tranquila e a equipe nos deu todo o suporte necessário durante o processo."</p>
+                    <p class="testimonial-author">- Fernanda Lima, Gerente de TI da GlobalServices</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Serviço de Interesse</label>
+                        <select id="service" class="form-control">
+                            <option value="" disabled selected>Selecione um serviço</option>
+                            <option value="web">Desenvolvimento Web</option>
+                            <option value="mobile">Aplicativos Mobile</option>
+                            <option value="custom">Software Personalizado</option>
+                            <option value="cloud">Cloud & DevOps</option>
+                            <option value="security">Cibersegurança</option>
+                            <option value="bi">BI & Analytics</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="border: none; cursor: pointer; width: 100%;">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>TechDev Solutions</h3>
+                <p>Soluções inovadoras em desenvolvimento de software para transformar o seu negócio.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#team">Equipe</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contato</h3>
+                <p>Av. Tecnologia, 1000</p>
+                <p>São Paulo - SP</p>
+                <p>contato@techdevsolutions.com</p>
+                <p>(11) 1234-5678</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechDev Solutions. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript (adicionando um script básico) -->
+    <script>
+        // Script para animação suave ao clicar nos links do menu
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Comentário: Pegando o elemento alvo baseado no hash do link
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                // Comentário: Fazendo a rolagem suave até o elemento
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // 70px de offset para considerar o header fixo
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Comentário: Função para destacar o item do menu ativo baseado na posição de rolagem
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                // Comentário: Verificando se o scroll atual está dentro da seção
+                if (window.scrollY >= (sectionTop - 100)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            // Comentário: Removendo a classe 'active' de todos os links e adicionando ao link atual
+            navLinks.forEach(link => {
+                link.style.color = ''; // Resetando a cor
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.style.color = '#4ade80'; // Destacando o link ativo
+                }
+            });
+        });
+
+        // Comentário: Validação simples do formulário
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Comentário: Simulando envio do formulário
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                
+                submitButton.textContent = 'Enviando...';
+                submitButton.disabled = true;
+                
+                // Comentário: Simulando uma requisição AJAX
+                setTimeout(() => {
+                    alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                    this.reset();
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>
